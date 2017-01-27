@@ -14,12 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url, include
-# from django.contrib import admin
 from bangazon_api import views
 from rest_framework.routers import DefaultRouter
+from django.contrib import admin
+from rest_framework.schemas import get_schema_view
 
+schema_view = get_schema_view(title="Pastebin API")
 """
-	Create a router and register out viewsets with it
+    Create a router and register out viewsets with it
 """
 router = DefaultRouter()
 router.register(r'products', views.ProductViewSet)
@@ -29,6 +31,7 @@ router.register(r'payment-method', views.PaymentMethodViewSet)
 router.register(r'product-categories', views.ProductCategoryViewSet)
 router.register(r'product-orders', views.ProductOrderViewSet)
 
+
 """
 	The API URLs are now automatically determined by the router.
 	Additionally, we include the login URLs for the browsable API.
@@ -36,6 +39,8 @@ router.register(r'product-orders', views.ProductOrderViewSet)
 """
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    url('^schema/$', schema_view),
+    url(r'^admin/', admin.site.urls),
+    url(r'^api/', include(router.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]

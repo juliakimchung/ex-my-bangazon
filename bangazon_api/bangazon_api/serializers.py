@@ -1,31 +1,31 @@
 from rest_framework import serializers
 from bangazon_api.models import *
 
-class ProductSerializer(serializers.ModelSerializer):
+class ProductSerializer(serializers.HyperlinkedModelSerializer):
   class Meta:
     model = Product
-    fields = ("id", "name", "price", "description", "quantity", "product_category_id", "user_id",)
+    fields = ("id", "url", "name", "price", "description", "quantity", "product_category_id", "user_id",)
 
-class ProductCategorySerializer(serializers.ModelSerializer):
+class ProductCategorySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ProductCategory
-        fields = ("id", "name",)
+        fields = ("id", "url", "name",)
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ("id", "first_name", "last_name", "date_of_birth")
+        fields = ("id", "url", "first_name", "last_name", "date_of_birth")
 
-class OrderSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order 
-        fields = ("id", "active", "user_id", "payment_method_id")
-class ProductOrderSerializer(serializers.ModelSerializer):
+        fields = ("id","url", "active", "user_id", "payment_method_id")
+class ProductOrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = ProductOrder
-        fields = ("id", "product_id", "order_id")
+        fields = ("id", "url", "product_id", "order_id")
 
-class PaymentMethodSerializer(serializers.ModelSerializer):
+class PaymentMethodSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = PaymentMethod
-        fields = ("id", "name", "account_number", "user_id")
+        fields = ("id", "url", "name", "account_number", "user_id")
