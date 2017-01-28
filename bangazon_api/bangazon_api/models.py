@@ -2,7 +2,6 @@ from django.db import models
 
 
 
-
 class Product(models.Model):
     """
     Class to represent a product for sale on Bangazon
@@ -14,7 +13,7 @@ class Product(models.Model):
     description = models.TextField(max_length=300, default= '')
     product_category_id = models.ForeignKey("ProductCategory", on_delete= models.CASCADE)
     quantity = models.IntegerField()
-    user_id = models.ForeignKey("User", on_delete=models.CASCADE)
+    user_id = models.ForeignKey("UserProfile", on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -23,7 +22,7 @@ class Product(models.Model):
     class Meta:
         ordering = ('name',)
 
-class User(models.Model):
+class UserProfile(models.Model):
 
     """
     This is a class to represent a user on Bangazon
@@ -51,7 +50,7 @@ class PaymentMethod(models.Model):
     created = models.DateTimeField(auto_now_add= True)
     name = models.CharField(max_length=50, default="")
     account_number = models.CharField(max_length=100, blank = True, )
-    user_id = models.ForeignKey('User', on_delete=models.CASCADE)
+    user_id = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -65,7 +64,7 @@ class PaymentMethod(models.Model):
 class Order(models.Model):
 
     active = models.BooleanField(default = False)
-    user_id= models.ForeignKey("User", on_delete=models.CASCADE)
+    user_id= models.ForeignKey("UserProfile", on_delete=models.CASCADE)
     payment_method_id = models.ForeignKey("PaymentMethod", on_delete=models.CASCADE )
 
     def __str__(self):
@@ -104,6 +103,10 @@ class ProductCategory(models.Model):
 
     class Meta:
         ordering = ('name',)
+
+
+
+
 
 
 
