@@ -1,7 +1,8 @@
 from django.contrib import admin
-from bangazon_api.models import UserProfile
+from . import models
 
-
-
-admin.site.register(UserProfile)
-
+admin.site.register(models.Product)
+# admin.site.register(models.ProductOrder)
+admin.site.register(models.PaymentMethod)
+admin.site.register(models.Order)
+admin.site.register(models.ProductCategory)
