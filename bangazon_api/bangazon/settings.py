@@ -27,6 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+REST_FRAMEWORK = {
+     'PAGE_SIZE': 10,
+     'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        ),
+}
 
 # Application definition
 
@@ -81,6 +87,7 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
 
 
 # Password validation
